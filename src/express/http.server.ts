@@ -1,4 +1,5 @@
 import express from "express"
+import cors from "cors";
 import * as bodyParser from "body-parser"
 import { RaceRoutes } from './routes/race.routes';
 import { UserRoutes } from './routes/user.routes';
@@ -25,6 +26,9 @@ export class HttpServer {
     public carRoutes: CarRoutes = new CarRoutes();
 
     private config(): void {
+        this.app.use(cors({
+            origin: "http://localhost:4200"
+        }))
         this.app.use(bodyParser.json());
         this.app.use(bodyParser.urlencoded({ extended: false }));
     }
