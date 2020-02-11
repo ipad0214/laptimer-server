@@ -10,6 +10,7 @@ export class CarRoutes {
         app.route("/car") 
             .post((req: Request, res: Response) => {
                 dbServerApi.post("car", req.body).then((response) => {
+                    console.log(response);
                     res.status(200).send(response);
                 });
             })
