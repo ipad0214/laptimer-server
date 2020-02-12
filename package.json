@@ -4,7 +4,8 @@
   "description": "controlling race, start race, end race.",
   "main": "main.js",
   "scripts": {
-    "build": "tsc"
+    "build": "tsc",
+    "run": "cd dist && node ./main.js"
   },
   "author": "Patrick Kuckelsberg",
   "license": "MIT",

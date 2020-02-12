@@ -1,3 +1,4 @@
+import * as fs from 'fs';
 import { RaceWebSocket } from './websocket/websocket';
 import { HttpServer } from './express/http.server';
 import { DbServerApi } from './api/db.server.api';
@@ -12,9 +13,12 @@ class Main {
     private dbServerApi: DbServerApi;
 
     constructor() {
+        let key = fs.readFileSync("./cert/server.key", 'utf8');
+        let cert = fs.readFileSync("./cert/server.cert", 'utf8');
+
         this.dbServerApi = new DbServerApi(PORT_DB);
         this.raceWebSocket = new RaceWebSocket(PORT_WSS);
-        this.httpServer = new HttpServer(PORT_HTTP, this.raceWebSocket, this.dbServerApi);
+        this.httpServer = new HttpServer(PORT_HTTP, this.raceWebSocket, key, cert, this.dbServerApi);
     }
 
     public run() {
