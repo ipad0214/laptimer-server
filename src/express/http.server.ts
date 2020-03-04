@@ -12,8 +12,6 @@ export class HttpServer {
     constructor(
         private port: number, 
         private websocket: any,
-        private key: any,
-        private cert: any,
         private dbServerApi: DbServerApi
         ) {
         this.app = express();
@@ -37,11 +35,8 @@ export class HttpServer {
     }
 
     public run() {
-        https.createServer({
-            key: this.key,
-            cert: this.cert
-        }, this.app)
-        .listen(this.port, () => {
+        https.createServer(this.app)
+        .listen(this.port, '0.0.0.0',() => {
             console.log(`server started on port: ${this.port}`);
         });
     }
