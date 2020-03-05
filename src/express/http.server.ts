@@ -1,5 +1,6 @@
 import express from "express"
 import cors from "cors";
+import * as https from 'https';
 import * as bodyParser from "body-parser"
 import { RaceRoutes } from './routes/race.routes';
 import { UserRoutes } from './routes/user.routes';
@@ -34,8 +35,9 @@ export class HttpServer {
     }
 
     public run() {
-        this.app.listen(this.port, () => {
-            console.log("server started");
+        https.createServer(this.app)
+        .listen(this.port, '0.0.0.0',() => {
+            console.log(`server started on port: ${this.port}`);
         });
     }
 }
