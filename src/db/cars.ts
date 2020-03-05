@@ -6,13 +6,13 @@ export class CarsDatabase extends DatabaseEngine {
         super("./db_files/cars");
     }
 
-    public insert(car: CarModel): Promise<boolean> {
-        return new Promise<boolean>((resolve, reject) => {
+    public async insert(car: CarModel): Promise<boolean> {
+        return new Promise<boolean>(async (resolve, reject) => {
+            car.id = await this.createAutoIncrementId();
             this.db.insert(car, (err, datasets) => {
                 if(err !== null) {
                     reject(false);
                 }
-
                 console.log(datasets);
                 resolve(true);
             });

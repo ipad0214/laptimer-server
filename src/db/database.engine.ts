@@ -7,10 +7,29 @@ export class DatabaseEngine {
         this.db = new DataStore({
             filename: this.filePath,
             autoload: true
-        })
+        });
 
         this.db.loadDatabase((err) => {
             console.log(err);        
+        });
+    }
+
+    public createAutoIncrementId(): Promise<number> {
+        return new Promise<number> ((resolve, reject) => {
+            this.db.find({}).sort({ id: -1 }).limit(1).exec(function (err, docs) {
+                if(err !== null) {
+                    reject(false);
+                    return;
+                }
+
+                if(docs.length === 0) {
+                    resolve(0);
+                    return;
+                }
+
+                console.log(docs[0].id);
+                resolve(docs[0].id + 1);
+            });
         });
     }
 }

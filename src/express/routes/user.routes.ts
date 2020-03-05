@@ -1,7 +1,4 @@
-import axios from "axios";
-
 import { Request, Response } from "express";
-import { DbServerApi } from '../../api/db.server.api';
 
 
 export class UserRoutes {
