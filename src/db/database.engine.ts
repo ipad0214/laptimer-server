@@ -8,5 +8,9 @@ export class DatabaseEngine {
             filename: this.filePath,
             autoload: true
         })
+
+        this.db.loadDatabase((err) => {
+            console.log(err);        
+        });
     }
 }

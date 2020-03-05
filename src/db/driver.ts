@@ -1,12 +1,15 @@
 import { DatabaseEngine } from "./database.engine"
-import { CarModel } from "./../models/car.model"
+import { DriverModel } from "../models/driver.model";
+
 
 export class CarsDatabase extends DatabaseEngine {
     constructor() {
-        super("db_files/cars");
+        super("db_files/drivers");
+        this.db.loadDatabase((err) => {
+            console.log(err);        });
     }
 
-    public insert(car: CarModel): Promise<boolean> {
+    public insert(car: DriverModel): Promise<boolean> {
         return new Promise<boolean>((resolve, reject) => {
             this.db.insert(car, (err, datasets) => {
                 if(err !== undefined) {
@@ -19,13 +22,13 @@ export class CarsDatabase extends DatabaseEngine {
         });
     }
 
-    public find(obj: any): Promise<Array<CarModel>> {
-        return new Promise<Array<CarModel>>((resolve, reject) => {
+    public find(obj: any): Promise<Array<DriverModel>> {
+        return new Promise<Array<DriverModel>>((resolve, reject) => {
             this.db.find(obj, (err, docs) => {
                 if(err !== undefined) {
-                    return reject(new Array<CarModel>());
+                    return reject(new Array<DriverModel>());
                 }
-                let datasets = new Array<CarModel>();
+                let datasets = new Array<DriverModel>();
                 datasets = docs;
                 resolve(datasets);
             });
