@@ -7,17 +7,15 @@ import { DbServerApi } from '../../api/db.server.api';
 export class UserRoutes {
     constructor() {}
 
-    public routes(app: any, dbServerApi: DbServerApi): void {
+    public routes(app: any): void {
         app.route("/user") 
             .post((req: Request, res: Response) => {
-                dbServerApi.post("user", req.body).then((response) => {
-                    res.status(200).send(response);
-                });
+                let { body } = req;
+                console.log(body);
             })
             .get((req: Request, res: Response) => {
-                dbServerApi.get("user", req.body).then((response) => {
-                    res.status(200).send(response);
-                });
+                let { body } = req;
+                console.log(body);
             });
     }
 }

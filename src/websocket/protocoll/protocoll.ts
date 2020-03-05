@@ -1,6 +1,8 @@
-import { REQUEST, POST } from 'type';
+import { REQUEST, POST } from './type';
 
 export class LaptimerProtocoll {
-    public payload: string | undefined; // payload as JSON string
-    public type: string |  REQUEST;
+    constructor(
+        public payload: string = "",
+        public type: string = REQUEST
+    ) {}
 }

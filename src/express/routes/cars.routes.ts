@@ -1,22 +1,25 @@
-import axios from "axios";
-
 import { Request, Response } from "express";
-import { DbServerApi } from '../../api/db.server.api';
+import { CarsDatabase } from './../../db/cars'
+import {CarModel} from "../../models/car.model";
 
 export class CarRoutes {
+    public carsDatabase = new CarsDatabase();
+
     constructor() {}
 
-    public routes(app: any, dbServerApi: DbServerApi): void {
+    public routes(app: any): void {
         app.route("/car") 
             .post((req: Request, res: Response) => {
-                dbServerApi.post("car", req.body).then((response) => {
-                    console.log(response);
-                    res.status(200).send(response);
+                let { body }  = req;
+                this.carsDatabase.insert(body).then(success => {
+                    this.carsDatabase.find({}).then(result => {
+                        res.status(200).send(result);
+                    });
                 });
             })
             .get((req: Request, res: Response) => {
-                dbServerApi.get("car", req.body).then((response) => {
-                    res.status(200).send(response);
+                this.carsDatabase.find({}).then((result) => {
+                    res.status(200).send(result)
                 });
             });
     }
