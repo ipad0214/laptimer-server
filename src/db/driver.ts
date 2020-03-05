@@ -7,9 +7,10 @@ export class CarsDatabase extends DatabaseEngine {
         super("./db_files/drivers");
     }
 
-    public insert(car: DriverModel): Promise<boolean> {
-        return new Promise<boolean>((resolve, reject) => {
-            this.db.insert(car, (err, datasets) => {
+    public insert(driver: DriverModel): Promise<boolean> {
+        return new Promise<boolean>(async (resolve, reject) => {
+            driver.id = await this.createAutoIncrementId();
+            this.db.insert(driver, (err, datasets) => {
                 if(err !== null) {
                     reject(false);
                 }

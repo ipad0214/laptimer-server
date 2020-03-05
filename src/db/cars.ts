@@ -13,7 +13,6 @@ export class CarsDatabase extends DatabaseEngine {
                 if(err !== null) {
                     reject(false);
                 }
-                console.log(datasets);
                 resolve(true);
             });
         });
