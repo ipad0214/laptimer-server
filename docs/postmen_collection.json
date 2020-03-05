@@ -1,0 +1,60 @@
+{
+  "info": {
+    "_postman_id": "b64b7263-f1cc-4026-9f67-a6604b563ba5",
+    "name": "Laptimer",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+  },
+  "item": [
+    {
+      "name": "cars",
+      "request": {
+        "method": "GET",
+        "header": [],
+        "url": {
+          "raw": "{{server}}/car",
+          "host": [
+            "{{server}}"
+          ],
+          "path": [
+            "car"
+          ]
+        }
+      },
+      "response": []
+    },
+    {
+      "name": "cars",
+      "request": {
+        "method": "POST",
+        "header": [
+          {
+            "key": "Content-Type",
+            "name": "Content-Type",
+            "value": "application/json",
+            "type": "text"
+          }
+        ],
+        "body": {
+          "mode": "raw",
+          "raw": "{\n\t\"name\": \"f1 2004\",\n\t\"manufacturer\": \"Ferrari\",\n\t\"img\": \"jisdajfgoisajdgoijasdf\",\n\t\"steering\": 4,\n\t\"drift\": 2,\n\t\"speed\": 10,\n\t\"accelration\": 8\n}",
+          "options": {
+            "raw": {
+              "language": "json"
+            }
+          }
+        },
+        "url": {
+          "raw": "{{server}}/car",
+          "host": [
+            "{{server}}"
+          ],
+          "path": [
+            "car"
+          ]
+        }
+      },
+      "response": []
+    }
+  ],
+  "protocolProfileBehavior": {}
+}
