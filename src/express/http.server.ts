@@ -4,6 +4,8 @@ import * as bodyParser from "body-parser"
 import { RaceRoutes } from './routes/race.routes';
 import { UserRoutes } from './routes/user.routes';
 import { CarRoutes } from './routes/cars.routes';
+import {CarsDatabase} from "../db/cars";
+import {DriverDatabase} from "../db/driver";
 
 
 export class HttpServer {    
@@ -18,10 +20,12 @@ export class HttpServer {
         this.carRoutes.routes(this.app);
     }
 
+    public carsDatabase: CarsDatabase = new CarsDatabase();
+    public driversDatabase: DriverDatabase = new DriverDatabase();
     public app: express.Application;
     public raceRoutes: RaceRoutes = new RaceRoutes();
-    public userRoutes: UserRoutes = new UserRoutes();
-    public carRoutes: CarRoutes = new CarRoutes();
+    public userRoutes: UserRoutes = new UserRoutes(this.driversDatabase, this.carsDatabase);
+    public carRoutes: CarRoutes = new CarRoutes(this.carsDatabase);
 
     private config(): void {
         this.app.use(cors({

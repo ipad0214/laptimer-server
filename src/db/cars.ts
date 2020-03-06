@@ -1,5 +1,6 @@
 import { DatabaseEngine } from "./database.engine"
-import { CarModel } from "./../models/car.model"
+import { CarModel } from "../models/car.model"
+import {DriverModel} from "../models/driver.model";
 
 export class CarsDatabase extends DatabaseEngine {
     constructor() {
@@ -9,11 +10,11 @@ export class CarsDatabase extends DatabaseEngine {
     public async insert(car: CarModel): Promise<boolean> {
         return new Promise<boolean>(async (resolve, reject) => {
             car.id = await this.createAutoIncrementId();
-            this.db.insert(car, (err, datasets) => {
+            this.db.insert(car, (err, dataSets) => {
                 if(err !== null) {
                     reject(false);
                 }
-                resolve(true);
+                resolve(dataSets);
             });
         });
     }
@@ -28,6 +29,18 @@ export class CarsDatabase extends DatabaseEngine {
                 resolve(datasets);
             });
         })
+    }
+
+    public single(obj: any): Promise<CarModel> {
+        return new Promise<CarModel> ((resolve, reject) => {
+            this.db.findOne(obj, (err, doc) => {
+                if(err !== null) {
+                    return reject(new CarModel());
+                }
+
+                resolve(doc);
+            });
+        });
     }
 
     public delete(id: number): Promise<boolean> {        

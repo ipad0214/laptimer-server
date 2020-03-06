@@ -2,7 +2,7 @@ import { DatabaseEngine } from "./database.engine"
 import { DriverModel } from "../models/driver.model";
 
 
-export class CarsDatabase extends DatabaseEngine {
+export class DriverDatabase extends DatabaseEngine {
     constructor() {
         super("./db_files/drivers");
     }
@@ -10,12 +10,12 @@ export class CarsDatabase extends DatabaseEngine {
     public insert(driver: DriverModel): Promise<boolean> {
         return new Promise<boolean>(async (resolve, reject) => {
             driver.id = await this.createAutoIncrementId();
-            this.db.insert(driver, (err, datasets) => {
+            this.db.insert(driver, (err, dataSets) => {
                 if(err !== null) {
                     reject(false);
                 }
 
-                console.log(datasets);
+                console.log(dataSets);
                 resolve(true);
             });
         });
@@ -27,10 +27,20 @@ export class CarsDatabase extends DatabaseEngine {
                 if(err !== null) {
                     return reject(new Array<DriverModel>());
                 }
-                let datasets = new Array<DriverModel>();
-                datasets = docs;
-                resolve(datasets);
+                resolve(docs);
             });
+        });
+    }
+
+    public single(obj: any): Promise<DriverModel> {
+        return new Promise<DriverModel> ((resolve, reject) => {
+             this.db.findOne(obj, (err, doc) => {
+                if(err !== null) {
+                    return reject(new DriverModel());
+                }
+
+                resolve(doc);
+             });
         });
     }
 
@@ -41,8 +51,7 @@ export class CarsDatabase extends DatabaseEngine {
                     reject(false);
                     return;
                 }
-                
-                console.log(removedSets);
+
                 resolve(true);
             });
         });
