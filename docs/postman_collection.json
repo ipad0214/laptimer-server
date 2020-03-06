@@ -1,0 +1,167 @@
+{
+  "info": {
+    "_postman_id": "b64b7263-f1cc-4026-9f67-a6604b563ba5",
+    "name": "Laptimer",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+  },
+  "item": [
+    {
+      "name": "cars",
+      "request": {
+        "method": "GET",
+        "header": [],
+        "url": {
+          "raw": "{{server}}/car",
+          "host": [
+            "{{server}}"
+          ],
+          "path": [
+            "car"
+          ]
+        }
+      },
+      "response": []
+    },
+    {
+      "name": "cars",
+      "request": {
+        "method": "POST",
+        "header": [
+          {
+            "key": "Content-Type",
+            "name": "Content-Type",
+            "value": "application/json",
+            "type": "text"
+          }
+        ],
+        "body": {
+          "mode": "raw",
+          "raw": "{\n\t\"name\": \"f1 2004\",\n\t\"manufacturer\": \"Ferrari\",\n\t\"img\": \"jisdajfgoisajdgoijasdf\",\n\t\"steering\": 4,\n\t\"drift\": 2,\n\t\"speed\": 10,\n\t\"accelration\": 8\n}",
+          "options": {
+            "raw": {
+              "language": "json"
+            }
+          }
+        },
+        "url": {
+          "raw": "{{server}}/car",
+          "host": [
+            "{{server}}"
+          ],
+          "path": [
+            "car"
+          ]
+        }
+      },
+      "response": []
+    },
+    {
+      "name": "drivers",
+      "request": {
+        "method": "GET",
+        "header": [],
+        "url": {
+          "raw": "{{server}}/driver?id=1",
+          "host": [
+            "{{server}}"
+          ],
+          "path": [
+            "driver"
+          ],
+          "query": [
+            {
+              "key": "id",
+              "value": "1"
+            }
+          ]
+        }
+      },
+      "response": []
+    },
+    {
+      "name": "drivers all",
+      "request": {
+        "method": "GET",
+        "header": [],
+        "url": {
+          "raw": "{{server}}/driver",
+          "host": [
+            "{{server}}"
+          ],
+          "path": [
+            "driver"
+          ]
+        }
+      },
+      "response": []
+    },
+    {
+      "name": "drivers",
+      "request": {
+        "method": "POST",
+        "header": [
+          {
+            "key": "Content-Type",
+            "name": "Content-Type",
+            "value": "application/json",
+            "type": "text"
+          }
+        ],
+        "body": {
+          "mode": "raw",
+          "raw": "{\n\t\"name\": \"Dieter\", \n\t\"favoriteCar\": 1,\n\t\"img\": \"iosadjgiasjdgoijasdoigjoaisdjgoiasdjgoijsadgoijasdg\"\n}",
+          "options": {
+            "raw": {
+              "language": "json"
+            }
+          }
+        },
+        "url": {
+          "raw": "{{server}}/driver",
+          "host": [
+            "{{server}}"
+          ],
+          "path": [
+            "driver"
+          ]
+        }
+      },
+      "response": []
+    },
+    {
+      "name": "start race",
+      "request": {
+        "method": "POST",
+        "header": [
+          {
+            "key": "Content-Type",
+            "name": "Content-Type",
+            "value": "application/json",
+            "type": "text"
+          }
+        ],
+        "body": {
+          "mode": "raw",
+          "raw": "{\n\t\"duration\": 10,\n\t\"driverOne\": 2,\n\t\"driverTwo\": 1,\n\t\"carOne\": 1,\n\t\"carTwo\": 2\n}",
+          "options": {
+            "raw": {
+              "language": "json"
+            }
+          }
+        },
+        "url": {
+          "raw": "{{server}}/race/start",
+          "host": [
+            "{{server}}"
+          ],
+          "path": [
+            "race",
+            "start"
+          ]
+        }
+      },
+      "response": []
+    }
+  ],
+  "protocolProfileBehavior": {}
+}

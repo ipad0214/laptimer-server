@@ -10,7 +10,7 @@ export class CarRoutes {
         app.route("/car") 
             .post((req: Request, res: Response) => {
                 let { body }  = req;
-                this.carsDatabase.insert(body).then(success => {
+                this.carsDatabase.insert(body).then(() => {
                     this.carsDatabase.find({}).then(result => {
                         res.status(200).send(result);
                     });

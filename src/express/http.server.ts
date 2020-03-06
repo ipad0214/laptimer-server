@@ -6,16 +6,17 @@ import { UserRoutes } from './routes/user.routes';
 import { CarRoutes } from './routes/cars.routes';
 import {CarsDatabase} from "../db/cars";
 import {DriverDatabase} from "../db/driver";
+import {RaceController} from "../controller/race.conntroller";
 
 
 export class HttpServer {    
     constructor(
-        private port: number, 
-        private websocket: any
+        private port: number,
+        private raceController: RaceController
         ) {
         this.app = express();
         this.config();
-        this.raceRoutes.routes(this.app, this.websocket);
+        this.raceRoutes.routes(this.app);
         this.userRoutes.routes(this.app);
         this.carRoutes.routes(this.app);
     }
@@ -23,7 +24,7 @@ export class HttpServer {
     public carsDatabase: CarsDatabase = new CarsDatabase();
     public driversDatabase: DriverDatabase = new DriverDatabase();
     public app: express.Application;
-    public raceRoutes: RaceRoutes = new RaceRoutes();
+    public raceRoutes: RaceRoutes = new RaceRoutes(this.raceController);
     public userRoutes: UserRoutes = new UserRoutes(this.driversDatabase, this.carsDatabase);
     public carRoutes: CarRoutes = new CarRoutes(this.carsDatabase);
 
