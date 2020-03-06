@@ -1,33 +1,34 @@
 import { RaceWebSocket } from '../websocket/websocket';
 import { RaceModel } from '../models/race.model';
+import {CarsDatabase} from "../db/cars";
+import {DriverDatabase} from "../db/driver";
+import {Lane} from "../models/lane.model";
 
 export class RaceController {
     private activeRace: RaceModel | undefined;
 
     constructor(
         private websocket: RaceWebSocket,
+        private carDB: CarsDatabase,
+        private driverDB: DriverDatabase
     ) {}
 
-    public setup(raceModel: RaceModel) {
+    public setup(laneOne: Lane, laneTwo: Lane) {
+        let raceModel = new RaceModel(laneOne, laneTwo);
+
         this.activeRace = raceModel;
+        return raceModel;
     }
 
     public start() {
 
     }
 
-    public roundUp(lane: number) {
-        if(lane === 1) {
-            this.activeRace.driverOneLane++;
-        } else if (lane === 2) {
-            this.activeRace.driverTwoLane++;
-        } else {
-            console.log("no lane selected");
-        }
+    private calcGap() {
 
     }
 
-    private calcGap() {
-
+    private update() {
+        this.websocket.send(JSON.stringify(this.activeRace));
     }
 }

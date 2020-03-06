@@ -12,7 +12,9 @@ import {RaceController} from "../controller/race.conntroller";
 export class HttpServer {    
     constructor(
         private port: number,
-        private raceController: RaceController
+        private raceController: RaceController,
+        public carsDatabase: CarsDatabase,
+        public driversDatabase: DriverDatabase
         ) {
         this.app = express();
         this.config();
@@ -21,8 +23,6 @@ export class HttpServer {
         this.carRoutes.routes(this.app);
     }
 
-    public carsDatabase: CarsDatabase = new CarsDatabase();
-    public driversDatabase: DriverDatabase = new DriverDatabase();
     public app: express.Application;
     public raceRoutes: RaceRoutes = new RaceRoutes(this.raceController);
     public userRoutes: UserRoutes = new UserRoutes(this.driversDatabase, this.carsDatabase);

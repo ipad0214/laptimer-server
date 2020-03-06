@@ -21,6 +21,8 @@ export class RaceRoutes {
 
         app.route("/race/start") 
             .post((req: Request, res: Response) => {
+                let { body } = req;
+                this.raceController.setup(body.laneOne, body.laneTwo);
                 res.status(200).send();
             })
             .get((req: Request, res: Response) => {
@@ -30,7 +32,7 @@ export class RaceRoutes {
 
         app.route("race/round/finished")
             .post((req: Request, res: Response) => {
-                this.raceController.roundUp(req.body.lane);
+                
             });
     }
 }
