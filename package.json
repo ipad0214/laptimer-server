@@ -10,6 +10,7 @@
   "author": "Patrick Kuckelsberg",
   "license": "MIT",
   "dependencies": {
+    "@types/axios": "^0.14.0",
     "@types/express": "^4.17.1",
     "@types/nedb": "^1.8.9",
     "@types/ws": "5.1.0",
