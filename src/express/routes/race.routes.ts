@@ -1,7 +1,7 @@
 import { Request, Response } from "express";
 import {RaceModel} from "../../models/race.model";
 import {DriverModel} from "../../models/driver.model";
-import {RaceController} from "../../controller/race.conntroller";
+import {RaceController} from "../../controller/race.controller";
 
 export class RaceRoutes {
     constructor(
