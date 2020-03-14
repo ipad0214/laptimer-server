@@ -8,19 +8,14 @@ import {response} from "express";
 
 
 export class RaceController {
-    private activeRace: RaceModel;
+    private activeRace: RaceModel = new RaceModel();
 
     constructor(
-        private websocket: RaceWebSocket,
-        private carDB: CarsDatabase,
-        private driverDB: DriverDatabase
+        private websocket: RaceWebSocket
     ) {}
 
     public setup(laneOne: Lane, laneTwo: Lane) {
-        let raceModel = new RaceModel(laneOne, laneTwo);
-
-        this.activeRace = raceModel;
-        return raceModel;
+        this.activeRace = new RaceModel(laneOne, laneTwo);
     }
 
     public start() {
@@ -34,12 +29,38 @@ export class RaceController {
     }
 
     private update() {
+        this.checkRaceFinished();
         this.websocket.send(JSON.stringify(this.activeRace));
+    }
+
+    private raceFinished() {
+        axios.post("http://192.168.2.100/finished", response => {
+            console.log(response);
+        });
+    }
+
+    private checkRaceFinished(): Promise<boolean> {
+        return new Promise<boolean> ((resolve, reject) => {
+            if(this.activeRace.duration === this.activeRace.laneOne.rounds) {
+                this.raceFinished();
+            }
+
+            if(this.activeRace.duration === this.activeRace.laneTwo.rounds) {
+                this.raceFinished();
+            }
+        });
     }
 
     public countRound(lane: number) {
         if(this.activeRace !== undefined) {
+            if (lane === 0) {
+                this.activeRace.laneOne.rounds += 1;
+            }
 
+            if (lane === 1) {
+                this.activeRace.laneTwo.rounds += 1;
+            }
+            this.update()
         }
     }
 }
