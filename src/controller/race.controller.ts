@@ -1,10 +1,7 @@
 import { RaceWebSocket } from '../websocket/websocket';
 import { RaceModel } from '../models/race.model';
-import { CarsDatabase } from "../db/cars";
-import { DriverDatabase } from "../db/driver";
 import { Lane } from "../models/lane.model";
 import axios from "axios";
-import {response} from "express";
 
 
 export class RaceController {
