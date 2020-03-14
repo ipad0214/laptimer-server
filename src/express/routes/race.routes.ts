@@ -30,9 +30,10 @@ export class RaceRoutes {
                 res.status(200).send("received");
             });
 
-        app.route("race/round/finished")
+        app.route("/race/round")
             .post((req: Request, res: Response) => {
-                
+                let { body } = req;
+                console.log(body);
             });
     }
 }
