@@ -1,6 +1,6 @@
 import { RaceWebSocket } from './websocket/websocket';
 import { HttpServer } from './express/http.server';
-import {RaceController} from "./controller/race.conntroller";
+import {RaceController} from "./controller/race.controller";
 import {CarsDatabase} from "./db/cars";
 import {DriverDatabase} from "./db/driver";
 

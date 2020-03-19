@@ -6,7 +6,7 @@ import { UserRoutes } from './routes/user.routes';
 import { CarRoutes } from './routes/cars.routes';
 import {CarsDatabase} from "../db/cars";
 import {DriverDatabase} from "../db/driver";
-import {RaceController} from "../controller/race.conntroller";
+import {RaceController} from "../controller/race.controller";
 
 
 export class HttpServer {    

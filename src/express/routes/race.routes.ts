@@ -1,7 +1,7 @@
 import { Request, Response } from "express";
 import {RaceModel} from "../../models/race.model";
 import {DriverModel} from "../../models/driver.model";
-import {RaceController} from "../../controller/race.conntroller";
+import {RaceController} from "../../controller/race.controller";
 
 export class RaceRoutes {
     constructor(
@@ -30,9 +30,10 @@ export class RaceRoutes {
                 res.status(200).send("received");
             });
 
-        app.route("race/round")
+        app.route("/race/round")
             .post((req: Request, res: Response) => {
-
+                let { body } = req;
+                console.log(body);
             });
     }
 }
