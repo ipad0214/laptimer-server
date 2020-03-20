@@ -2,17 +2,25 @@ import { RaceWebSocket } from '../websocket/websocket';
 import { RaceModel } from '../models/race.model';
 import { Lane } from "../models/lane.model";
 import axios from "axios";
+import {CarsDatabase} from "../db/cars";
+import {DriverDatabase} from "../db/driver";
 
 
 export class RaceController {
-    private activeRace: RaceModel = new RaceModel();
+    private activeRace: RaceModel = new RaceModel(new Lane(), new Lane());
 
     constructor(
-        private websocket: RaceWebSocket
+        private websocket: RaceWebSocket,
+        private carsDatabase: CarsDatabase,
+        private driverDatabase: DriverDatabase
     ) {}
 
-    public setup(laneOne: Lane, laneTwo: Lane) {
-        this.activeRace = new RaceModel(laneOne, laneTwo);
+    public async setup(laneOne: any, laneTwo: any) {
+        let carOne = await this.carsDatabase.single({id: laneOne.car});
+        let driverOne = await this.driverDatabase.single({id: laneOne.driver});
+        let carTwo = await this.carsDatabase.single({id: laneTwo.car});
+        let driverTwo = await this.driverDatabase.single({id: laneTwo.driver});
+        this.activeRace = new RaceModel(new Lane(carOne, driverOne), new Lane(carTwo, driverTwo));
     }
 
     public start() {

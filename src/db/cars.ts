@@ -4,7 +4,7 @@ import {DriverModel} from "../models/driver.model";
 
 export class CarsDatabase extends DatabaseEngine {
     constructor() {
-        super("./db_files/cars");
+        super("./db_files/cars.db");
     }
 
     public async insert(car: CarModel): Promise<boolean> {

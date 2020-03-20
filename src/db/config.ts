@@ -1,16 +1,16 @@
 import { DatabaseEngine } from "./database.engine"
-import { DriverModel } from "../models/driver.model";
+import { ConfigModel } from "../models/config.model";
 
 
-export class DriverDatabase extends DatabaseEngine {
+export class ConfigDatabase extends DatabaseEngine {
     constructor() {
-        super("./db_files/drivers");
+        super("./db_files/config.db");
     }
 
-    public insert(driver: DriverModel): Promise<boolean> {
+    public insert(config: ConfigModel): Promise<boolean> {
         return new Promise<boolean>(async (resolve, reject) => {
-            driver.id = await this.createAutoIncrementId();
-            this.db.insert(driver, (err, dataSets) => {
+            config.id = await this.createAutoIncrementId();
+            this.db.insert(config, (err, dataSets) => {
                 if(err !== null) {
                     reject(false);
                 }
@@ -21,22 +21,11 @@ export class DriverDatabase extends DatabaseEngine {
         });
     }
 
-    public find(obj: any): Promise<Array<DriverModel>> {
-        return new Promise<Array<DriverModel>>((resolve, reject) => {
-            this.db.find(obj, (err, docs) => {
+    public load(): Promise<ConfigModel> {
+        return new Promise<ConfigModel> ((resolve, reject) => {
+            this.db.findOne({id: 0}, (err, doc) => {
                 if(err !== null) {
-                    return reject(new Array<DriverModel>());
-                }
-                resolve(docs);
-            });
-        });
-    }
-
-    public single(obj: any): Promise<DriverModel> {
-        return new Promise<DriverModel> ((resolve, reject) => {
-            this.db.findOne(obj, (err, doc) => {
-                if(err !== null) {
-                    return reject(new DriverModel());
+                    return reject(new ConfigModel());
                 }
 
                 resolve(doc);
@@ -44,9 +33,9 @@ export class DriverDatabase extends DatabaseEngine {
         });
     }
 
-    public delete(id: number): Promise<boolean> {
+    public delete(): Promise<boolean> {
         return new Promise<boolean>((resolve, reject) => {
-            this.db.remove(id, {}, (err, removedSets) => {
+            this.db.remove(0, {}, (err, removedSets) => {
                 if(err != null) {
                     reject(false);
                     return;

@@ -4,7 +4,7 @@ import { DriverModel } from "../models/driver.model";
 
 export class DriverDatabase extends DatabaseEngine {
     constructor() {
-        super("./db_files/drivers");
+        super("./db_files/drivers.db");
     }
 
     public insert(driver: DriverModel): Promise<boolean> {

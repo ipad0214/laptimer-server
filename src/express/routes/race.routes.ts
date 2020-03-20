@@ -14,12 +14,12 @@ export class RaceRoutes {
                 res.send("root route");
             });
 
-        app.route("/race")
+        app.route("/race/start")
             .get((req: Request, res: Response) => {
                 res.status(200).send("received");
             });
 
-        app.route("/race/start") 
+        app.route("/race/setup")
             .post((req: Request, res: Response) => {
                 let { body } = req;
                 this.raceController.setup(body.laneOne, body.laneTwo);
