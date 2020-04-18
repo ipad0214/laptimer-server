@@ -58,6 +58,7 @@ export class CarsDatabase extends DatabaseEngine {
     }
 
     public update(id: number, obj: any): Promise<any> {
+        console.log(obj);
         return new Promise<any> ((resolve, reject) => {
             this.db.update(
                 { id: id },

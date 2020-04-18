@@ -26,8 +26,6 @@ export class DatabaseEngine {
                     resolve(0);
                     return;
                 }
-
-                console.log(docs[0].id);
                 resolve(docs[0].id + 1);
             });
         });

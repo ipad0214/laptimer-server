@@ -11,7 +11,7 @@ export class UserRoutes {
     ) {}
 
     public routes(app: any): void {
-        app.route("/driver")
+        app.route("/user")
             .post((req: Request, res: Response) => {
                 let { body } = req;
                 this.driverDatabase.insert(body).then(success => {

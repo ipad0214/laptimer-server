@@ -24,11 +24,17 @@ export class CarRoutes {
                         return;
                     });
                 }
+
+                this.carsDatabase.find({}).then(cars => {
+                    res.status(200).send(cars);
+                    return;
+                });
             })
             .put((req, res) => {
                 this.carsDatabase.find({}).then((result) => {
                     res.status(200).send(result)
                     let { query, body } = req;
+                    console.log(query.id);
                     if (query.id !== undefined) {
                         this.carsDatabase.update(query.id, body).then(response => {
                             res.status(200).send(response);
