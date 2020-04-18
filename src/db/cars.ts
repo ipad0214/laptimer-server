@@ -56,4 +56,26 @@ export class CarsDatabase extends DatabaseEngine {
             });
         });
     }
+
+    public update(id: number, obj: any): Promise<any> {
+        return new Promise<any> ((resolve, reject) => {
+            this.db.update(
+                { id: id },
+                { $set: {
+                        name: obj.name,
+                        model: obj.model,
+                        manufacturer: obj.manufacturer,
+                        steering: obj.steering,
+                        speed: obj.speed,
+                        acceleration: obj.acceleration,
+                        drift: obj.drift
+                    }},
+                {},
+                function(err, numReplaced) {
+                    console.log("UPDATED: " + numReplaced);
+                    resolve(numReplaced);
+                }
+            );
+        });
+    }
 }

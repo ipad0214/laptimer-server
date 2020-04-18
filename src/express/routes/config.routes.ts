@@ -19,7 +19,12 @@ export class ConfigRoutes {
             })
             .delete((req, res) => {
                 res.status(200).send("received");
-            })
-
+            });
+        app.route("/ping")
+            .get((req, res) => {
+                res.status(200).send(JSON.stringify({
+                    heartbeat: true,
+                }));
+            });
     }
 }

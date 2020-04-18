@@ -35,9 +35,7 @@ export class HttpServer {
     public configRoutes: ConfigRoutes = new ConfigRoutes(this.configDatabase);
 
     private config(): void {
-        this.app.use(cors({
-            origin: "http://localhost:4200"
-        }));
+        this.app.use(cors());
         this.app.use(bodyParser.json());
         this.app.use(bodyParser.urlencoded({extended: false}));
     }
