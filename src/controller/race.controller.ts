@@ -1,10 +1,10 @@
 import { RaceWebSocket } from '../websocket/websocket';
 import { RaceModel } from '../models/race.model';
 import { Lane } from "../models/lane.model";
-import axios from "axios";
-import {CarsDatabase} from "../db/cars";
-import {DriverDatabase} from "../db/driver";
+import { CarsDatabase } from "../db/cars";
+import { DriverDatabase } from "../db/driver";
 
+import axios from "axios";
 
 export class RaceController {
     private activeRace: RaceModel = new RaceModel(new Lane(), new Lane());

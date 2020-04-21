@@ -1,7 +1,7 @@
 import { Request, Response } from "express";
-import {RaceModel} from "../../models/race.model";
-import {DriverModel} from "../../models/driver.model";
-import {RaceController} from "../../controller/race.controller";
+import { RaceModel } from "../../models/race.model";
+import { DriverModel } from "../../models/driver.model";
+import { RaceController } from "../../controller/race.controller";
 
 export class RaceRoutes {
     constructor(
@@ -34,6 +34,8 @@ export class RaceRoutes {
             .post((req: Request, res: Response) => {
                 let { body } = req;
                 console.log(body);
+                //send via websocket to clients
+                this.raceController.countRound(body.roundFinished);
             });
     }
 }
