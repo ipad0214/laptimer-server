@@ -1,4 +1,3 @@
-import { RaceWebSocket } from '../websocket/websocket';
 import { RaceModel } from '../models/race.model';
 import { Lane } from "../models/lane.model";
 import { CarsDatabase } from "../db/cars";
@@ -7,10 +6,9 @@ import { DriverDatabase } from "../db/driver";
 import axios from "axios";
 
 export class RaceController {
-    private activeRace: RaceModel = new RaceModel(new Lane(), new Lane());
+    public activeRace: RaceModel = new RaceModel(new Lane(), new Lane());
 
     constructor(
-        private websocket: RaceWebSocket,
         private carsDatabase: CarsDatabase,
         private driverDatabase: DriverDatabase
     ) {}
@@ -34,8 +32,7 @@ export class RaceController {
     }
 
     private update() {
-        this.checkRaceFinished();
-        this.websocket.send(JSON.stringify(this.activeRace));
+
     }
 
     private raceFinished() {
