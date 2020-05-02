@@ -15,6 +15,7 @@ export class RaceRoutes {
         app.route("/race/start")
             .get((req: Request, res: Response) => {
                 res.status(200).send("received");
+                this.raceController.start();
             });
 
         app.route("/race/setup")
@@ -24,6 +25,7 @@ export class RaceRoutes {
                 res.status(200).send();
             })
             .get((req: Request, res: Response) => {
+
                 console.log("GET");
                 res.status(200).send("received");
             });
@@ -32,7 +34,7 @@ export class RaceRoutes {
             .post((req: Request, res: Response) => {
                 let { body } = req;
                 console.log(body);
-                this.raceController.countRound(body.roundFinished);
+                //this.raceController.countRound(body.roundFinished);
             });
 
         app.route('/race/update')

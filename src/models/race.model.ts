@@ -6,4 +6,6 @@ export class RaceModel {
     public duration: number = 0;
     public leader: number = 0;
     public gap: string = "";
+    public started: boolean = false;
+    public aborted: boolean = false;
 }
