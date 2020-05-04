@@ -5,7 +5,6 @@ import { DriverDatabase } from "./db/driver";
 import {ConfigDatabase} from "./db/config";
 
 const PORT_HTTP = 4713;
-const PORT_WSS = 4712;
 
 class Main {
     private httpServer: HttpServer;

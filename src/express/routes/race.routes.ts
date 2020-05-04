@@ -34,7 +34,8 @@ export class RaceRoutes {
             .post((req: Request, res: Response) => {
                 let { body } = req;
                 console.log(body);
-                //this.raceController.countRound(body.roundFinished);
+                this.raceController.countRound(body.lane);
+                res.status(200).send(body);
             });
 
         app.route('/race/update')
