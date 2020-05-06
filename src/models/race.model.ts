@@ -2,8 +2,7 @@ import {DriverModel} from "./driver.model";
 import {Lane} from "./lane.model";
 
 export class RaceModel {
-    constructor(public laneOne: Lane, public laneTwo: Lane) { }
-    public duration: number = 0;
+    constructor(public laneOne: Lane, public laneTwo: Lane, public duration: number) { }
     public leader: number = 0;
     public gap: string = "";
     public started: boolean = false;

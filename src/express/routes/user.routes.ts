@@ -14,7 +14,7 @@ export class UserRoutes {
         app.route("/user")
             .post((req: Request, res: Response) => {
                 let { body } = req;
-                this.driverDatabase.insert(body).then(success => {
+                this.driverDatabase.insert(body).then(() => {
                     this.driverDatabase.find({}).then(result => {
                         res.status(200).send(result);
                     });

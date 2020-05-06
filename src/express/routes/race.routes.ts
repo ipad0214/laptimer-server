@@ -21,13 +21,10 @@ export class RaceRoutes {
         app.route("/race/setup")
             .post((req: Request, res: Response) => {
                 let { body } = req;
-                this.raceController.setup(body.laneOne, body.laneTwo);
-                res.status(200).send();
+                this.raceController.setup(body.laneOne, body.laneTwo, body.duration).then(() => res.status(200).send(this.raceController.activeRace));
             })
             .get((req: Request, res: Response) => {
-
-                console.log("GET");
-                res.status(200).send("received");
+                res.status(200).send(this.raceController.activeRace);
             });
 
         app.route("/race/round")

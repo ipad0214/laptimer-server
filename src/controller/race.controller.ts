@@ -6,7 +6,7 @@ import { DriverDatabase } from "../db/driver";
 import axios from "axios";
 
 export class RaceController {
-    public activeRace: RaceModel = new RaceModel(new Lane(), new Lane());
+    public activeRace: RaceModel = new RaceModel(new Lane(), new Lane(), 10);
     private archIp = "192.168.2.219";
 
     constructor(
@@ -14,12 +14,12 @@ export class RaceController {
         private driverDatabase: DriverDatabase
     ) {}
 
-    public async setup(laneOne: any, laneTwo: any) {
+    public async setup(laneOne: any, laneTwo: any, duration: any) {
         let carOne = await this.carsDatabase.single({id: laneOne.car});
         let driverOne = await this.driverDatabase.single({id: laneOne.driver});
         let carTwo = await this.carsDatabase.single({id: laneTwo.car});
         let driverTwo = await this.driverDatabase.single({id: laneTwo.driver});
-        this.activeRace = new RaceModel(new Lane(carOne, driverOne), new Lane(carTwo, driverTwo));
+        this.activeRace = new RaceModel(new Lane(carOne, driverOne), new Lane(carTwo, driverTwo), duration);
     }
 
     public start() {
