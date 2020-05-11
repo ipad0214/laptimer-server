@@ -21,7 +21,7 @@ export class RaceRoutes {
         app.route("/race/setup")
             .post((req: Request, res: Response) => {
                 let { body } = req;
-                this.raceController.setup(body.laneOne, body.laneTwo, body.duration).then(() => res.status(200).send(this.raceController.activeRace));
+                this.raceController.setup(body).then(() => res.status(200).send(this.raceController.activeRace));
             })
             .get((req: Request, res: Response) => {
                 res.status(200).send(this.raceController.activeRace);
