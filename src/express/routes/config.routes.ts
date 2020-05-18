@@ -1,5 +1,6 @@
 import { Request, Response } from "express";
 import { ConfigDatabase } from "../../db/config";
+import axios from "axios";
 
 export class ConfigRoutes {
     constructor(
@@ -22,9 +23,12 @@ export class ConfigRoutes {
             });
         app.route("/ping")
             .get((req, res) => {
-                res.status(200).send(JSON.stringify({
-                    heartbeat: true,
-                }));
+                axios.get("http://laptimer.local/ping").then(resp => {
+                    res.status(200).send(JSON.stringify({
+                        server: true,
+                        arch: resp.data.arch
+                    }));
+                })
             });
     }
 }

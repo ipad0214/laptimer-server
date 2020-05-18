@@ -24,7 +24,13 @@ export class UserRoutes {
                 let { query } = req;
                 if(query.id === undefined) {
                     let drivers = await this.driverDatabase.find({});
-                    return res.status(200).send(drivers);
+                    let driversWithCars: Array<any> = [];
+                    for (const driver of drivers) {
+                        let carId = driver.favoriteCar;
+                        driver.favoriteCarObj = await this.carsDatabase.single({id: carId});
+                        driversWithCars.push(driver)
+                    }
+                    return res.status(200).send(driversWithCars);
                 }
 
                 this.driverDatabase.single({id: Number(query.id)}).then((result: DriverModel) => {

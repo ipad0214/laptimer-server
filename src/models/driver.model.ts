@@ -3,4 +3,5 @@ export class DriverModel {
     public favoriteCar: number = 0;
     public races: number = 0;
     public img: string = "";
+    public favoriteCarObj: any = {};
 }

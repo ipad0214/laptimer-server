@@ -14,12 +14,12 @@ export class RaceController {
         private driverDatabase: DriverDatabase
     ) {}
 
-    public async setup(laneOne: any, laneTwo: any, duration: any) {
-        let carOne = await this.carsDatabase.single({id: laneOne.car});
-        let driverOne = await this.driverDatabase.single({id: laneOne.driver});
-        let carTwo = await this.carsDatabase.single({id: laneTwo.car});
-        let driverTwo = await this.driverDatabase.single({id: laneTwo.driver});
-        this.activeRace = new RaceModel(new Lane(carOne, driverOne), new Lane(carTwo, driverTwo), duration);
+    public async setup(raceObj: any) {
+        let carOne = await this.carsDatabase.single({id: raceObj.carLaneOne});
+        let driverOne = await this.driverDatabase.single({id: raceObj.driverLaneOne});
+        let carTwo = await this.carsDatabase.single({id: raceObj.carLaneTwo});
+        let driverTwo = await this.driverDatabase.single({id: raceObj.driverLaneTwo});
+        this.activeRace = new RaceModel(new Lane(carOne, driverOne), new Lane(carTwo, driverTwo), raceObj.duration);
     }
 
     public start() {
@@ -35,42 +35,47 @@ export class RaceController {
         });
     }
 
-    private calcGap() {
-
-    }
-
-    private update() {
-
-    }
-
     private raceFinished() {
         axios.post("http://192.168.2.100/finished", response => {
             console.log(response);
+            //finish the race;
         });
     }
 
-    private checkRaceFinished(): Promise<boolean> {
-        return new Promise<boolean> ((resolve, reject) => {
-            if(this.activeRace.duration === this.activeRace.laneOne.rounds) {
-                this.raceFinished();
-            }
+    private checkRaceFinished() {
+        if(this.activeRace.duration < this.activeRace.laneOne.rounds) {
+            this.raceFinished();
+        }
 
-            if(this.activeRace.duration === this.activeRace.laneTwo.rounds) {
-                this.raceFinished();
-            }
-        });
+        if(this.activeRace.duration < this.activeRace.laneTwo.rounds) {
+            this.raceFinished();
+        }
     }
 
     public countRound(lane: number) {
         if(this.activeRace !== undefined) {
             if (lane === 0) {
                 this.activeRace.laneOne.rounds += 1;
+                this.checkLeader();
             }
 
             if (lane === 1) {
                 this.activeRace.laneTwo.rounds += 1;
+                this.checkLeader();
             }
-            this.update()
+
+            this.checkRaceFinished();
+        }
+    }
+
+    public checkLeader() {
+        if(this.activeRace.laneOne.rounds > this.activeRace.laneTwo.rounds) {
+            this.activeRace.laneOne.leader = true;
+            this.activeRace.laneTwo.leader = false;
+        }
+        if(this.activeRace.laneTwo.rounds > this.activeRace.laneOne.rounds) {
+            this.activeRace.laneOne.leader = false;
+            this.activeRace.laneTwo.leader = true;
         }
     }
 }
