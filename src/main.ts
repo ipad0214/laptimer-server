@@ -2,7 +2,7 @@ import { HttpServer } from './express/http.server';
 import { RaceController } from "./controller/race.controller";
 import { CarsDatabase } from "./db/cars";
 import { DriverDatabase } from "./db/driver";
-import {ConfigDatabase} from "./db/config";
+import { ConfigDatabase } from "./db/config";
 
 const PORT_HTTP = 4713;
 
@@ -19,7 +19,6 @@ class Main {
 
     public run() {
         this.httpServer.run();
-        console.log("waiting for websocket");
     }
 }
 

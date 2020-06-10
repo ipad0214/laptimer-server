@@ -18,6 +18,18 @@ export class RaceRoutes {
                 this.raceController.start();
             });
 
+        app.route("/race/finish")
+            .get((req: Request, res: Response) => {
+                res.status(200).send("received");
+                this.raceController.raceFinished();
+            });
+
+        app.route("/race/abort")
+            .get((req: Request, res: Response) => {
+                res.status(200).send("received");
+                this.raceController.abort();
+            });
+
         app.route("/race/setup")
             .post((req: Request, res: Response) => {
                 let { body } = req;
@@ -29,10 +41,10 @@ export class RaceRoutes {
 
         app.route("/race/round")
             .post((req: Request, res: Response) => {
+                console.log(req.body);
                 let { body } = req;
-                console.log(body);
                 this.raceController.countRound(body.lane);
-                res.status(200).send(body);
+                res.status(200).send("OK");
             });
 
         app.route('/race/update')

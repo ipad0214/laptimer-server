@@ -34,7 +34,6 @@ export class CarRoutes {
                 this.carsDatabase.find({}).then((result) => {
                     res.status(200).send(result)
                     let { query, body } = req;
-                    console.log(query.id);
                     if (query.id !== undefined) {
                         this.carsDatabase.update(query.id, body).then(response => {
                             res.status(200).send(response);

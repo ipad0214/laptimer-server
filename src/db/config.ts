@@ -14,8 +14,6 @@ export class ConfigDatabase extends DatabaseEngine {
                 if(err !== null) {
                     reject(false);
                 }
-
-                console.log(dataSets);
                 resolve(true);
             });
         });

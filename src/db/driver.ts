@@ -14,8 +14,6 @@ export class DriverDatabase extends DatabaseEngine {
                 if(err !== null) {
                     reject(false);
                 }
-
-                console.log("DATA: " + dataSets);
                 resolve(true);
             });
         });

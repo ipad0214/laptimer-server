@@ -50,15 +50,12 @@ export class CarsDatabase extends DatabaseEngine {
                     reject(false);
                     return;
                 }
-                
-                console.log(removedSets);
                 resolve(true);
             });
         });
     }
 
     public update(id: number, obj: any): Promise<any> {
-        console.log(obj);
         return new Promise<any> ((resolve, reject) => {
             this.db.update(
                 { id: id },

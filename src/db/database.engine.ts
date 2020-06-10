@@ -10,7 +10,6 @@ export class DatabaseEngine {
         });
 
         this.db.loadDatabase((err) => {
-            console.log(err);        
         });
     }
 

@@ -7,7 +7,7 @@ import axios from "axios";
 
 export class RaceController {
     public activeRace: RaceModel = new RaceModel(new Lane(), new Lane(), 10);
-    private archIp = "192.168.2.219";
+    private archIp = "192.168.2.156";
 
     constructor(
         private carsDatabase: CarsDatabase,
@@ -25,21 +25,18 @@ export class RaceController {
     public start() {
         axios.get(`http://${this.archIp}/start`).then(resp => {
             this.activeRace.started = resp.data.started;
-        });
+        }).catch(err => console.log(err));
     }
 
     public abort() {
-        axios.get(`http://${this.archIp}/start`).then(resp => {
+        axios.get(`http://${this.archIp}/abort`).then(resp => {
             this.activeRace.started = resp.data.started;
             this.activeRace.aborted = resp.data.abort;
         });
     }
 
-    private raceFinished() {
-        axios.post("http://192.168.2.100/finished", response => {
-            console.log(response);
-            //finish the race;
-        });
+    public raceFinished() {
+        axios.get(`http://${this.archIp}/finish`).then(resp => {});
     }
 
     private checkRaceFinished() {
