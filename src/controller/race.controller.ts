@@ -40,11 +40,11 @@ export class RaceController {
     }
 
     private checkRaceFinished() {
-        if(this.activeRace.duration < this.activeRace.laneOne.rounds) {
+        if(this.activeRace.duration <= this.activeRace.laneOne.rounds) {
             this.raceFinished();
         }
 
-        if(this.activeRace.duration < this.activeRace.laneTwo.rounds) {
+        if(this.activeRace.duration <= this.activeRace.laneTwo.rounds) {
             this.raceFinished();
         }
     }
